@@ -47,12 +47,12 @@ public class AutonomousConfiguration extends BaseConfiguration {
 	// ****************************************************************************
 
 	public void addAutonmousChoices() {
-		autonomousChooser.addDefault("[Straight]", "[Straight]");
+		autonomousChooser.setDefaultOption("[Straight]", "[Straight]");
 		
-		autonomousChooser.addObject(NO_AUTONOMOUS, NO_AUTONOMOUS);
+		autonomousChooser.addOption(NO_AUTONOMOUS, NO_AUTONOMOUS);
 		
 		for (Command command : autoCommands) {
-			autonomousChooser.addObject(command.getName(), command.getName());
+			autonomousChooser.addOption(command.getName(), command.getName());
 		}
 		
 		SmartDashboard.putData("Autonomous Mode", autonomousChooser);

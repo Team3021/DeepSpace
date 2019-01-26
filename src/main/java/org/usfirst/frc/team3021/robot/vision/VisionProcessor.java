@@ -7,7 +7,7 @@ import org.usfirst.frc.team3021.robot.device.RunnableDevice;
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.VideoSource;
-import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.cameraserver.CameraServer;
 import org.usfirst.frc.team3021.robot.configuration.Preferences;
 
 public class VisionProcessor extends RunnableDevice {

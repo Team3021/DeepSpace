@@ -7,7 +7,7 @@ import org.usfirst.frc.team3021.robot.vision.VisionProcessor;
 import edu.wpi.cscore.MjpegServer;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoSource;
-import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.cameraserver.CameraServer;
 import org.usfirst.frc.team3021.robot.configuration.Preferences;
 
 public class VisionSystem extends Subsystem {

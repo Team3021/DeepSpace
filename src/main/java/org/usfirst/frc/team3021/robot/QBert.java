@@ -1,12 +1,5 @@
 package org.usfirst.frc.team3021.robot;
 
-import org.usfirst.frc.team3021.robot.commands.auto.LeftToSCALE;
-import org.usfirst.frc.team3021.robot.commands.auto.LeftToSWITCH;
-import org.usfirst.frc.team3021.robot.commands.auto.MiddleToLeftSWITCH;
-import org.usfirst.frc.team3021.robot.commands.auto.MiddleToRightSWITCH;
-import org.usfirst.frc.team3021.robot.commands.auto.RightToSCALE;
-import org.usfirst.frc.team3021.robot.commands.auto.RightToSWITCH;
-import org.usfirst.frc.team3021.robot.commands.auto.Straight;
 import org.usfirst.frc.team3021.robot.configuration.AutonomousConfiguration;
 import org.usfirst.frc.team3021.robot.configuration.ControllerConfiguration;
 import org.usfirst.frc.team3021.robot.configuration.DeviceCommandConfiguration;
@@ -20,12 +13,12 @@ import org.usfirst.frc.team3021.robot.subsystem.DriveSystem;
 import org.usfirst.frc.team3021.robot.subsystem.VisionSystem;
 
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
-public class QBert extends IterativeRobot {
+public class QBert extends TimedRobot {
 	
 	// Member Attributes
 	private static ControllerConfiguration controllerConfiguration;
