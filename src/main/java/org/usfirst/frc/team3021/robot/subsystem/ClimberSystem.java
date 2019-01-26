@@ -22,7 +22,7 @@ public class ClimberSystem extends Subsystem {
 	
 	public ClimberSystem() {		
 		isEnabled =  Preferences.getInstance().getBoolean(PREF_ENABLED, ENABLED_DEFAULT);
-		voltage = 1.0;
+		voltage = Preferences.getInstance().getDouble(PREF_VOLTAGE, VOLTAGE_DEFAULT);
 
 		motor = new Spark(0);
 		motor.setInverted(true);
