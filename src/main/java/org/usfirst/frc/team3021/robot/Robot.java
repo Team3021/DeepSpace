@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
-public class QBert extends TimedRobot {
+public class Robot extends TimedRobot {
 	
 	// Member Attributes
 	private static ControllerConfiguration controllerConfiguration;
@@ -34,7 +34,7 @@ public class QBert extends TimedRobot {
 	
 	private static String gameData = "";
 
-	public QBert() {
+	public Robot() {
 		super();
 
 		// Create the sub systems

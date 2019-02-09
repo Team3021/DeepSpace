@@ -1,6 +1,6 @@
 package org.usfirst.frc.team3021.robot.commands;
 
-import org.usfirst.frc.team3021.robot.QBert;
+import org.usfirst.frc.team3021.robot.Robot;
 import org.usfirst.frc.team3021.robot.subsystem.VisionSystem;
 
 public class VisionCommand extends Command {
@@ -10,7 +10,7 @@ public class VisionCommand extends Command {
 	public VisionCommand() {
 		super();
 		
-		vision = QBert.getVisionSystem();
+		vision = Robot.getVisionSystem();
 		
 		requires(vision);
 	}

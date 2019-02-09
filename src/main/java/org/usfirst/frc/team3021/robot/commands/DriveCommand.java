@@ -1,6 +1,6 @@
 package org.usfirst.frc.team3021.robot.commands;
 
-import org.usfirst.frc.team3021.robot.QBert;
+import org.usfirst.frc.team3021.robot.Robot;
 import org.usfirst.frc.team3021.robot.subsystem.DriveSystem;
 
 import org.usfirst.frc.team3021.robot.configuration.Preferences;
@@ -27,7 +27,7 @@ public abstract class DriveCommand extends Command {
 	public DriveCommand() {
 		super();
 		
-		this.driveSystem = QBert.getDriveSystem();
+		this.driveSystem = Robot.getDriveSystem();
 		
 		requires(this.driveSystem);
 		

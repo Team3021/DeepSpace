@@ -1,6 +1,6 @@
 package org.usfirst.frc.team3021.robot.commands;
 
-import org.usfirst.frc.team3021.robot.QBert;
+import org.usfirst.frc.team3021.robot.Robot;
 import org.usfirst.frc.team3021.robot.subsystem.CollectorSystem;
 
 public class CollectorCommand extends Command {
@@ -10,7 +10,7 @@ public class CollectorCommand extends Command {
 	public CollectorCommand() {
 		super();
 		
-		this.collectorSystem = QBert.getCollectorSystem();
+		this.collectorSystem = Robot.getCollectorSystem();
 		
 		requires(this.collectorSystem);
 	}
