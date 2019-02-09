@@ -31,14 +31,12 @@ public interface Controller {
 	boolean isRotatingLeft45();
 
 	// ****************************************************************************
-	// **********************             CLIMBER            **********************
+	// **********************             ELEVATOR            *********************
 	// ****************************************************************************
 
-	boolean isClimberSafteyOn();
-
-	boolean isClimberExtending();
+	boolean isElevatorExtending();
 	
-	boolean isClimberContracting();
+	boolean isElevatorContracting();
 
 	// ****************************************************************************
 	// **********************            COLLECTOR           **********************

@@ -67,38 +67,33 @@ public class CollectorSystem extends Subsystem {
 		if (!isEnabled) {
 			return;
 		}
-		
+
 		if (tote_switch.get()) {
 			tote_light.set(Relay.Value.kOff);
 		}
 		else {
 			tote_light.set(Relay.Value.kForward);
-	    }			
+		}			
 
-		if (auxController.isClimberSafteyOn())  {
-			collector_deploy.set(false);
-			collector_stow.set(true);
+
+		if (auxController.isCollectorDeploying()) {
+			deploy();
 		}
-		else {
-			if (auxController.isCollectorDeploying()) {
-				deploy();
-			}
-			
-			if (auxController.isCollectorStowing()) {
-				stow();
-			}
 
-			// Control the motor
-			if (mainController.isCollecting() || auxController.isCollecting()) {
-				collect();
-			}
-			else if (mainController.isLaunching() || auxController.isLaunching()) {
-				deliver();
-			}
-			
-			else {
-				stop();
-			}
+		if (auxController.isCollectorStowing()) {
+			stow();
+		}
+
+		// Control the motor
+		if (mainController.isCollecting() || auxController.isCollecting()) {
+			collect();
+		}
+		else if (mainController.isLaunching() || auxController.isLaunching()) {
+			deliver();
+		}
+
+		else {
+			stop();
 		}
 	}
 

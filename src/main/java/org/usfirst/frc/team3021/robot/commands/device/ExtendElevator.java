@@ -1,29 +1,29 @@
 package org.usfirst.frc.team3021.robot.commands.device;
 
-import org.usfirst.frc.team3021.robot.commands.ClimberCommand;
+import org.usfirst.frc.team3021.robot.commands.ElevatorCommand;
 
-public class ExtendClimber extends ClimberCommand {
+public class ExtendElevator extends ElevatorCommand {
 
 	double duration; // seconds
 
-	public ExtendClimber() {
+	public ExtendElevator() {
 		this(1.0);
 	}
 	
-	public ExtendClimber(double duration) {
+	public ExtendElevator(double duration) {
 		super();
 		this.duration = duration;
 	}
 
 	@Override
 	protected void execute() {
-		climberSystem.extend();
+		elevatorSystem.extend();
 	}
 
 	@Override
 	protected void end() {
 		System.out.println("Done with the elevator.");
-		climberSystem.stop();
+		elevatorSystem.stop();
 	}
 
 	@Override

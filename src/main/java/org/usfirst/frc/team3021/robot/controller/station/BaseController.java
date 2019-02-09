@@ -90,22 +90,17 @@ public abstract class BaseController implements Controller {
 	}
 
 	// ****************************************************************************
-	// **********************             CLIMBER            **********************
+	// **********************             ELEVATOR           **********************
 	// ****************************************************************************
 
 	@Override
-	public boolean isClimberSafteyOn() {
-		return getRawButton("isClimberSafteyOn");
-	}
-
-	@Override
-	public boolean isClimberExtending() {
-		return getRawButton("isClimberExtending");
+	public boolean isElevatorExtending() {
+		return getRawButton("isElevatorExtending");
 	}
 	
 	@Override
-	public boolean isClimberContracting() {
-		return getRawButton("isClimberContracting");
+	public boolean isElevatorContracting() {
+		return getRawButton("isElevatorContracting");
 	}
 
 	// ****************************************************************************

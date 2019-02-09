@@ -6,9 +6,7 @@ import java.util.List;
 import org.usfirst.frc.team3021.robot.commands.device.CollectTote;
 import org.usfirst.frc.team3021.robot.commands.device.DeliverTote;
 import org.usfirst.frc.team3021.robot.commands.device.DeployTote;
-import org.usfirst.frc.team3021.robot.commands.device.ExtendClimber;
-import org.usfirst.frc.team3021.robot.commands.device.OuttakeScale;
-import org.usfirst.frc.team3021.robot.commands.device.OuttakeSwitch;
+import org.usfirst.frc.team3021.robot.commands.device.ExtendElevator;
 import org.usfirst.frc.team3021.robot.commands.device.StowTote;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -32,7 +30,7 @@ public class DeviceCommandConfiguration extends BaseConfiguration {
 	
 	private void addCommandsToDashboard() {
 		// Elevator
-		commands.add(new ExtendClimber());
+		commands.add(new ExtendElevator());
 		
 		// Forks up or down
 		commands.add(new StowTote(1));
@@ -42,10 +40,6 @@ public class DeviceCommandConfiguration extends BaseConfiguration {
 		commands.add(new DeliverTote(1));
 		commands.add(new CollectTote());
 		
-		// Combined Actions
-		commands.add(new OuttakeSwitch());
-		commands.add(new OuttakeScale());
-
 		addCommandsToDashboard(COMMAND_GROUP, commands, enabled);
 	}
 }

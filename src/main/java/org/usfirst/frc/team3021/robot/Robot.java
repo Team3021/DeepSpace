@@ -7,7 +7,7 @@ import org.usfirst.frc.team3021.robot.configuration.DriveCommandConfiguration;
 import org.usfirst.frc.team3021.robot.configuration.SystemCommandConfiguration;
 import org.usfirst.frc.team3021.robot.configuration.TestCommandConfiguration;
 import org.usfirst.frc.team3021.robot.controller.station.Controller;
-import org.usfirst.frc.team3021.robot.subsystem.ClimberSystem;
+import org.usfirst.frc.team3021.robot.subsystem.ElevatorSystem;
 import org.usfirst.frc.team3021.robot.subsystem.CollectorSystem;
 import org.usfirst.frc.team3021.robot.subsystem.DriveSystem;
 import org.usfirst.frc.team3021.robot.subsystem.VisionSystem;
@@ -26,7 +26,7 @@ public class Robot extends TimedRobot {
 	
 	private static DriveSystem driveSystem;
 	private static CollectorSystem collectorSystem;	
-	private static ClimberSystem climberSystem;
+	private static ElevatorSystem elevatorSystem;
 	private static VisionSystem visionSystem;
 	
 	private Controller mainController;
@@ -41,7 +41,7 @@ public class Robot extends TimedRobot {
 		visionSystem = new VisionSystem();
 		driveSystem = new DriveSystem();
 		collectorSystem = new CollectorSystem();
-		climberSystem = new ClimberSystem();
+		elevatorSystem = new ElevatorSystem();
 		
 		// Create the main configuration
 		controllerConfiguration = new ControllerConfiguration();
@@ -68,7 +68,7 @@ public class Robot extends TimedRobot {
 		driveSystem.setControllers(mainController, auxController);
 		visionSystem.setControllers(mainController, auxController);
 		collectorSystem.setControllers(mainController, auxController);
-		climberSystem.setControllers(mainController, auxController);
+		elevatorSystem.setControllers(mainController, auxController);
 	}
 
 	// ****************************************************************************
@@ -120,7 +120,7 @@ public class Robot extends TimedRobot {
 		driveSystem.teleopPeriodic();
 		visionSystem.teleopPeriodic();
 		collectorSystem.teleopPeriodic();
-		climberSystem.teleopPeriodic();
+		elevatorSystem.teleopPeriodic();
 	}
 
 	// ****************************************************************************
@@ -173,8 +173,8 @@ public class Robot extends TimedRobot {
 		return collectorSystem;
 	}
 	
-	public static ClimberSystem getClimberSystem() {
-		return climberSystem;
+	public static ElevatorSystem getElevatorSystem() {
+		return elevatorSystem;
 	}
 	
 	public static String getGameData() {
