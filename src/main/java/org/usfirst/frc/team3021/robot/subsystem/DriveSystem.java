@@ -147,9 +147,6 @@ public class DriveSystem extends Subsystem {
 
 		gyroController.getGyroRotation();
 
-		driveController.getEncoderDistance();
-		driveController.getEncoderRate();
-
 		driveController.getMotorOutput();
 
 		if (mainController.isStoppingCommands() || auxController.isStoppingCommands()) {
