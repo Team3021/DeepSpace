@@ -1,14 +1,12 @@
 package org.usfirst.frc.team3021.robot.subsystem;
 
 import org.usfirst.frc.team3021.robot.commands.CollectorCommand;
+import org.usfirst.frc.team3021.robot.configuration.Preferences;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Compressor;
-import org.usfirst.frc.team3021.robot.configuration.Preferences;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Relay;
 
 public class CollectorSystem extends Subsystem {
 	
@@ -26,9 +24,6 @@ public class CollectorSystem extends Subsystem {
 	private double lowVoltage = 0.5;
 	
 	private static final double REVERSE_MULTIPLIER = -1.0;
-	
-	private static DigitalInput tote_switch;
-	private static Relay        tote_light;
 	
 	private static Compressor compressor;
 
@@ -53,9 +48,6 @@ public class CollectorSystem extends Subsystem {
 			left_motor = new WPI_TalonSRX(27);
 			left_motor.setInverted(true);
 			
-			tote_switch = new DigitalInput(4);
-			tote_light = new Relay(0);
-
 			compressor = new Compressor(0);
 			compressor.setClosedLoopControl(true);
 		}
@@ -67,14 +59,6 @@ public class CollectorSystem extends Subsystem {
 		if (!isEnabled) {
 			return;
 		}
-
-		if (tote_switch.get()) {
-			tote_light.set(Relay.Value.kOff);
-		}
-		else {
-			tote_light.set(Relay.Value.kForward);
-		}			
-
 
 		if (auxController.isCollectorDeploying()) {
 			deploy();
@@ -138,10 +122,6 @@ public class CollectorSystem extends Subsystem {
 		
 		right_motor.set(0);
 		left_motor.set(0);
-	}
-	
-	public boolean hasTote() {
-		return !(tote_switch.get());
 	}
 	
 	public void deploy() {

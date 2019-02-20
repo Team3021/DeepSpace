@@ -2,18 +2,18 @@ package org.usfirst.frc.team3021.robot.commands.device;
 
 import org.usfirst.frc.team3021.robot.commands.CollectorCommand;
 
-public class DeliverTote extends CollectorCommand {
+public class DeliverCargo extends CollectorCommand {
 
 	int time = 2; // seconds
 	double speed = 0.3;
 	
-	public DeliverTote(int time) {
+	public DeliverCargo(int time) {
 		super();
 
 		this.time = time;
 	}
 	
-	public DeliverTote(int time, double speed) {
+	public DeliverCargo(int time, double speed) {
 		super();
 
 		this.time = time;
