@@ -8,7 +8,7 @@ import org.usfirst.frc.team3021.robot.configuration.SystemCommandConfiguration;
 import org.usfirst.frc.team3021.robot.configuration.TestCommandConfiguration;
 import org.usfirst.frc.team3021.robot.controller.station.Controller;
 import org.usfirst.frc.team3021.robot.subsystem.ElevatorSystem;
-import org.usfirst.frc.team3021.robot.subsystem.CollectorSystem;
+import org.usfirst.frc.team3021.robot.subsystem.ClawSystem;
 import org.usfirst.frc.team3021.robot.subsystem.DriveSystem;
 import org.usfirst.frc.team3021.robot.subsystem.VisionSystem;
 
@@ -25,7 +25,7 @@ public class Robot extends TimedRobot {
 	private static AutonomousConfiguration autonomousConfiguration;
 	
 	private static DriveSystem driveSystem;
-	private static CollectorSystem collectorSystem;	
+	private static ClawSystem clawSystem;	
 	private static ElevatorSystem elevatorSystem;
 	private static VisionSystem visionSystem;
 	
@@ -40,7 +40,7 @@ public class Robot extends TimedRobot {
 		// Create the sub systems
 		visionSystem = new VisionSystem();
 		driveSystem = new DriveSystem();
-		collectorSystem = new CollectorSystem();
+		clawSystem = new ClawSystem();
 		elevatorSystem = new ElevatorSystem();
 		
 		// Create the main configuration
@@ -67,7 +67,7 @@ public class Robot extends TimedRobot {
 
 		driveSystem.setControllers(mainController, auxController);
 		visionSystem.setControllers(mainController, auxController);
-		collectorSystem.setControllers(mainController, auxController);
+		clawSystem.setControllers(mainController, auxController);
 		elevatorSystem.setControllers(mainController, auxController);
 	}
 
@@ -119,7 +119,7 @@ public class Robot extends TimedRobot {
 		
 		driveSystem.teleopPeriodic();
 		visionSystem.teleopPeriodic();
-		collectorSystem.teleopPeriodic();
+		clawSystem.teleopPeriodic();
 		elevatorSystem.teleopPeriodic();
 	}
 
@@ -169,8 +169,8 @@ public class Robot extends TimedRobot {
 		return driveSystem;
 	}
 
-	public static CollectorSystem getCollectorSystem() {
-		return collectorSystem;
+	public static ClawSystem getClawSystem() {
+		return clawSystem;
 	}
 	
 	public static ElevatorSystem getElevatorSystem() {

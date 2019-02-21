@@ -43,18 +43,16 @@ public interface Controller {
 	boolean isTopElevatorContracting();
 
 	// ****************************************************************************
-	// **********************            COLLECTOR           **********************
+	// **********************               CLAW             **********************
 	// ****************************************************************************
-	
-	boolean isLaunching();
 	
 	boolean isLowVoltageLaunch();
 	
+	boolean isLaunching();
+	
 	boolean isCollecting();
 	
-	boolean isCollectorDeploying();
-
-	boolean isCollectorStowing();
+	boolean isClawDeploying();
 
 	// ****************************************************************************
 	// **********************             VISION             **********************

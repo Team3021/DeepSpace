@@ -1,8 +1,8 @@
 package org.usfirst.frc.team3021.robot.commands.device;
 
-import org.usfirst.frc.team3021.robot.commands.CollectorCommand;
+import org.usfirst.frc.team3021.robot.commands.ClawCommand;
 
-public class DeliverCargo extends CollectorCommand {
+public class DeliverCargo extends ClawCommand {
 
 	int time = 2; // seconds
 	double speed = 0.3;
@@ -22,13 +22,13 @@ public class DeliverCargo extends CollectorCommand {
 	
 	@Override
 	protected void execute() {
-		collectorSystem.deliver(speed);
+		clawSystem.deliver(speed);
 	}
 
 	@Override
 	protected void end() {
-		System.out.println("Done with the outtake.");
-		collectorSystem.stop();
+		System.out.println("Done with the delivery of cargo.");
+		clawSystem.stop();
 	}
 
 	@Override

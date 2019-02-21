@@ -114,13 +114,8 @@ public abstract class BaseController implements Controller {
 	}
 
 	// ****************************************************************************
-	// **********************            COLLECTOR           **********************
+	// **********************               CLAW             **********************
 	// ****************************************************************************
-	
-	@Override
-	public boolean isLaunching() {
-		return getRawButton("isLaunching");
-	}
 	
 	public boolean isLowVoltageLaunch() {
 		return getRawButton("isLowVoltageLaunch");
@@ -132,15 +127,15 @@ public abstract class BaseController implements Controller {
 	}
 	
 	@Override
-	public boolean isCollectorDeploying() {
-		return getRawButton("isCollectorDeploying");
+	public boolean isLaunching() {
+		return getRawButton("isLaunching");
 	}
 	
 	@Override
-	public boolean isCollectorStowing() {
-		return getRawButton("isCollectorStowing");
+	public boolean isClawDeploying() {
+		return getRawButton("isClawDeploying");
 	}
-
+	
 	// ****************************************************************************
 	// **********************             VISION             **********************
 	// ****************************************************************************

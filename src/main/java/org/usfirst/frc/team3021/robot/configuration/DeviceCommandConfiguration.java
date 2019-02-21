@@ -35,7 +35,7 @@ public class DeviceCommandConfiguration extends BaseConfiguration {
 		commands.add(new ExtendTopElevator());
 		commands.add(new ContractTopElevator());
 		
-		// Collector
+		// Claw
 		commands.add(new DeliverCargo(1));
 		
 		addCommandsToDashboard(COMMAND_GROUP, commands, enabled);
