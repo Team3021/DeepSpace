@@ -15,14 +15,14 @@ public class AuxController extends BaseController {
 
 		buttonActions.add(new ButtonAction(4, "SAFETY_TRIGGER", "UNASSIGNED"));
 	
-		buttonActions.add(new ButtonAction(5, "TOP_BLUE_BUTTON", "isCollectorDeploying"));
-		buttonActions.add(new ButtonAction(8, "TOP_RED_BUTTON", "isCollectorStowing"));
+		buttonActions.add(new ButtonAction(5, "TOP_BLUE_BUTTON", "isCollecting"));
+		buttonActions.add(new ButtonAction(8, "TOP_RED_BUTTON", "isLaunching"));
 
-		buttonActions.add(new ButtonAction(6, "MIDDLE_BLUE_BUTTON", "isCollecting"));
-		buttonActions.add(new ButtonAction(7, "BOTTOM_BLUE_BUTTON", "isLaunching"));
+		buttonActions.add(new ButtonAction(6, "MIDDLE_BLUE_BUTTON", "isBottomElevatorExtending"));
+		buttonActions.add(new ButtonAction(7, "BOTTOM_BLUE_BUTTON", "isBottomElevatorContracting"));
 	
-		buttonActions.add(new ButtonAction(9, "MIDDLE_RED_BUTTON", "isElevatorExtending"));
-		buttonActions.add(new ButtonAction(10, "BOTTOM_RED_BUTTON", "isElevatorContracting"));
+		buttonActions.add(new ButtonAction(9, "MIDDLE_RED_BUTTON", "isTopElevatorExtending"));
+		buttonActions.add(new ButtonAction(10, "BOTTOM_RED_BUTTON", "isTopElevatorContracting"));
 	}
 	
 	@Override

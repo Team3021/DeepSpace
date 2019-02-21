@@ -2,7 +2,11 @@ package org.usfirst.frc.team3021.robot.subsystem;
 
 import org.usfirst.frc.team3021.robot.commands.ElevatorCommand;
 import org.usfirst.frc.team3021.robot.configuration.Preferences;
-import edu.wpi.first.wpilibj.Spark;
+
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.Solenoid;
 
 public class ElevatorSystem extends Subsystem {
 	
@@ -11,21 +15,22 @@ public class ElevatorSystem extends Subsystem {
 
 	private boolean isEnabled = ENABLED_DEFAULT;
 	
-	private static final String PREF_VOLTAGE = "Elevator.motor.voltage";
-	private static final double VOLTAGE_DEFAULT = 1.0;
+	private static Compressor compressor;
 	
-	private double voltage = VOLTAGE_DEFAULT;
-	
-	private static final double REVERSE_MULTIPLIER = -1.0;
-	
-	private Spark motor;
+	private Solenoid topSolenoid;
+	private Solenoid bottomSolenoid;
 	
 	public ElevatorSystem() {		
 		isEnabled =  Preferences.getInstance().getBoolean(PREF_ENABLED, ENABLED_DEFAULT);
-		voltage = Preferences.getInstance().getDouble(PREF_VOLTAGE, VOLTAGE_DEFAULT);
 
-		motor = new Spark(0);
-		motor.setInverted(true);
+		if (isEnabled) {
+			compressor = new Compressor(0);
+			compressor.setClosedLoopControl(true);
+
+			topSolenoid = new Solenoid(1);
+			bottomSolenoid = new Solenoid(2);
+		}
+
 	}
 	
 	@Override
@@ -35,33 +40,57 @@ public class ElevatorSystem extends Subsystem {
 			return;
 		}
 
-		if (auxController.isElevatorExtending()) {
-			extend();
+		if (auxController.isBottomElevatorExtending()) {
+			extendBottom();
 		}
-		else if (auxController.isElevatorContracting()) {
-			contract();
+		else if (auxController.isBottomElevatorContracting()) {
+			contractBottom();
+		}
+		else if (auxController.isTopElevatorExtending()) {
+			extendBottom();
+		}
+		else if (auxController.isTopElevatorContracting()) {
+			contractBottom();
 		}
 		else {
 			stop();
 		}
 	}
 
-	public void extend() {
+	public void extendBottom() {
 		// don't do any actions as the sub system is not enabled
 		if (!isEnabled) {
 			return;
 		}
 		
-		motor.set(voltage);
+		bottomSolenoid.set(true);
 	}
 	
-	public void contract() {
+	public void contractBottom() {
 		// don't do any actions as the sub system is not enabled
 		if (!isEnabled) {
 			return;
 		}
 		
-		motor.set(REVERSE_MULTIPLIER * voltage);
+		bottomSolenoid.set(false);
+	}
+
+	public void extendTop() {
+		// don't do any actions as the sub system is not enabled
+		if (!isEnabled) {
+			return;
+		}
+		
+		topSolenoid.set(true);
+	}
+	
+	public void contractTop() {
+		// don't do any actions as the sub system is not enabled
+		if (!isEnabled) {
+			return;
+		}
+		
+		topSolenoid.set(false);
 	}
 	
 	public void stop() {
@@ -69,8 +98,6 @@ public class ElevatorSystem extends Subsystem {
 		if (!isEnabled) {
 			return;
 		}
-		
-		motor.set(0);
 	}
 
 	@Override

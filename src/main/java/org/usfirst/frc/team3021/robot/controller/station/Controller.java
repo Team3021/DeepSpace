@@ -34,9 +34,13 @@ public interface Controller {
 	// **********************             ELEVATOR            *********************
 	// ****************************************************************************
 
-	boolean isElevatorExtending();
+	boolean isBottomElevatorExtending();
 	
-	boolean isElevatorContracting();
+	boolean isBottomElevatorContracting();
+
+	boolean isTopElevatorExtending();
+	
+	boolean isTopElevatorContracting();
 
 	// ****************************************************************************
 	// **********************            COLLECTOR           **********************

@@ -2,21 +2,15 @@ package org.usfirst.frc.team3021.robot.commands.device;
 
 import org.usfirst.frc.team3021.robot.commands.ElevatorCommand;
 
-public class RetractElevator extends ElevatorCommand{
-	double duration; // seconds
+public class ContractBottomElevator extends ElevatorCommand{
 
-	public RetractElevator() {
-		this(1.5);
-	}
-	
-	public RetractElevator(double duration) {
+	public ContractBottomElevator() {
 		super();
-		this.duration = duration;
 	}
 
 	@Override
 	protected void execute() {
-		elevatorSystem.contract();
+		elevatorSystem.contractBottom();
 	}
 
 	@Override
@@ -27,6 +21,6 @@ public class RetractElevator extends ElevatorCommand{
 
 	@Override
 	protected boolean isFinished() {
-		return timeSinceInitialized() >= duration;
+		return true;
 	}
 }

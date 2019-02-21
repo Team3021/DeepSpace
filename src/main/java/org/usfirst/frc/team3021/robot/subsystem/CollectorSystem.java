@@ -5,7 +5,6 @@ import org.usfirst.frc.team3021.robot.configuration.Preferences;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Solenoid;
 
 public class CollectorSystem extends Subsystem {
@@ -24,8 +23,6 @@ public class CollectorSystem extends Subsystem {
 	private double lowVoltage = 0.5;
 	
 	private static final double REVERSE_MULTIPLIER = -1.0;
-	
-	private static Compressor compressor;
 
 	private WPI_TalonSRX right_motor;
 	private WPI_TalonSRX left_motor;
@@ -47,9 +44,6 @@ public class CollectorSystem extends Subsystem {
 			right_motor = new WPI_TalonSRX(26);
 			left_motor = new WPI_TalonSRX(27);
 			left_motor.setInverted(true);
-			
-			compressor = new Compressor(0);
-			compressor.setClosedLoopControl(true);
 		}
 	}
 

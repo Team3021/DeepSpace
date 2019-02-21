@@ -3,8 +3,11 @@ package org.usfirst.frc.team3021.robot.configuration;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.usfirst.frc.team3021.robot.commands.device.ContractBottomElevator;
+import org.usfirst.frc.team3021.robot.commands.device.ContractTopElevator;
 import org.usfirst.frc.team3021.robot.commands.device.DeliverCargo;
-import org.usfirst.frc.team3021.robot.commands.device.ExtendElevator;
+import org.usfirst.frc.team3021.robot.commands.device.ExtendBottomElevator;
+import org.usfirst.frc.team3021.robot.commands.device.ExtendTopElevator;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -27,7 +30,10 @@ public class DeviceCommandConfiguration extends BaseConfiguration {
 	
 	private void addCommandsToDashboard() {
 		// Elevator
-		commands.add(new ExtendElevator());
+		commands.add(new ExtendBottomElevator());
+		commands.add(new ContractBottomElevator());
+		commands.add(new ExtendTopElevator());
+		commands.add(new ContractTopElevator());
 		
 		// Collector
 		commands.add(new DeliverCargo(1));
