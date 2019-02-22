@@ -1,9 +1,12 @@
 package org.usfirst.frc.team3021.robot.subsystem;
 
 import org.usfirst.frc.team3021.robot.commands.ArmCommand;
+import org.usfirst.frc.team3021.robot.configuration.Dashboard;
 import org.usfirst.frc.team3021.robot.configuration.Preferences;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 
 public class ArmSystem extends Subsystem {
 	
@@ -27,6 +30,10 @@ public class ArmSystem extends Subsystem {
 	private WPI_TalonSRX elbowMotor;
 	private WPI_TalonSRX wristMotor;
 	
+	private AnalogPotentiometer elbowPosition;
+	private AnalogPotentiometer wristPosition;
+	
+	
 	public ArmSystem() {	
 		isEnabled =  Preferences.getInstance().getBoolean(PREF_ENABLED, ENABLED_DEFAULT);
 		elbowVoltage = Preferences.getInstance().getDouble(PREF_ELBOW_VOLTAGE, ELBOW_VOLTAGE_DEFAULT);
@@ -35,6 +42,9 @@ public class ArmSystem extends Subsystem {
 		if (isEnabled) {
 			elbowMotor = new WPI_TalonSRX(41);
 			wristMotor = new WPI_TalonSRX(42);
+			
+			elbowPosition = new AnalogPotentiometer(0, 360, 30);  // TODO determine the 0 point offset of the potentiometer
+			wristPosition = new AnalogPotentiometer(1, 360, 30);  // TODO determine the 0 point offset of the potentiometer
 		}
 	}
 
@@ -45,6 +55,9 @@ public class ArmSystem extends Subsystem {
 			return;
 		}
 
+		// display the position values
+		printArmPositions();
+		
 		// Control the arm motor
 		if (mainController.isArmForward() || auxController.isArmForward()) {
 			armForward();
@@ -66,6 +79,11 @@ public class ArmSystem extends Subsystem {
 		else {
 			stopWrist();
 		}
+	}
+	
+	public void printArmPositions() {
+		Dashboard.putNumber("Arm : Elbow Position: ", elbowPosition.get());
+		Dashboard.putNumber("Arm : Wrist Position: ", wristPosition.get());
 	}
 
 	public void armForward() {
