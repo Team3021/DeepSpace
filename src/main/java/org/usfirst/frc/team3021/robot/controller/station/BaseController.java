@@ -114,6 +114,30 @@ public abstract class BaseController implements Controller {
 	}
 
 	// ****************************************************************************
+	// **********************               ARM             **********************
+	// ****************************************************************************
+	
+	@Override
+	public boolean isArmForward() {
+		return getRawButton("isArmForward");
+	}
+	
+	@Override
+	public boolean isArmBackward() {
+		return getRawButton("isArmBackward");
+	}
+	
+	@Override
+	public boolean isWristForward() {
+		return getRawButton("isWristForward");
+	}
+	
+	@Override
+	public boolean isWristBackward() {
+		return getRawButton("isWristBackward");
+	}
+
+	// ****************************************************************************
 	// **********************               CLAW             **********************
 	// ****************************************************************************
 	

@@ -7,9 +7,10 @@ import org.usfirst.frc.team3021.robot.configuration.DriveCommandConfiguration;
 import org.usfirst.frc.team3021.robot.configuration.SystemCommandConfiguration;
 import org.usfirst.frc.team3021.robot.configuration.TestCommandConfiguration;
 import org.usfirst.frc.team3021.robot.controller.station.Controller;
-import org.usfirst.frc.team3021.robot.subsystem.ElevatorSystem;
+import org.usfirst.frc.team3021.robot.subsystem.ArmSystem;
 import org.usfirst.frc.team3021.robot.subsystem.ClawSystem;
 import org.usfirst.frc.team3021.robot.subsystem.DriveSystem;
+import org.usfirst.frc.team3021.robot.subsystem.ElevatorSystem;
 import org.usfirst.frc.team3021.robot.subsystem.VisionSystem;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -25,6 +26,7 @@ public class Robot extends TimedRobot {
 	private static AutonomousConfiguration autonomousConfiguration;
 	
 	private static DriveSystem driveSystem;
+	private static ArmSystem armSystem;	
 	private static ClawSystem clawSystem;	
 	private static ElevatorSystem elevatorSystem;
 	private static VisionSystem visionSystem;
@@ -40,6 +42,7 @@ public class Robot extends TimedRobot {
 		// Create the sub systems
 		visionSystem = new VisionSystem();
 		driveSystem = new DriveSystem();
+		armSystem = new ArmSystem();
 		clawSystem = new ClawSystem();
 		elevatorSystem = new ElevatorSystem();
 		
@@ -67,6 +70,7 @@ public class Robot extends TimedRobot {
 
 		driveSystem.setControllers(mainController, auxController);
 		visionSystem.setControllers(mainController, auxController);
+		armSystem.setControllers(mainController, auxController);
 		clawSystem.setControllers(mainController, auxController);
 		elevatorSystem.setControllers(mainController, auxController);
 	}
@@ -167,6 +171,10 @@ public class Robot extends TimedRobot {
 
 	public static DriveSystem getDriveSystem() {
 		return driveSystem;
+	}
+
+	public static ArmSystem getArmSystem() {
+		return armSystem;
 	}
 
 	public static ClawSystem getClawSystem() {
