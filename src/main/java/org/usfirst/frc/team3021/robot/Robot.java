@@ -13,9 +13,7 @@ import org.usfirst.frc.team3021.robot.subsystem.DriveSystem;
 import org.usfirst.frc.team3021.robot.subsystem.ElevatorSystem;
 import org.usfirst.frc.team3021.robot.subsystem.VisionSystem;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
@@ -84,16 +82,6 @@ public class Robot extends TimedRobot {
 		// Stop any commands that might be left running from another mode
 		System.out.println("Entering Autonomous Init");
 		Scheduler.getInstance().removeAll();
-		
-		while (gameData.isEmpty()) {
-			
-			System.out.println("Trying to get game data");
-
-			gameData = DriverStation.getInstance().getGameSpecificMessage();
-			
-
-			Timer.delay(0.005);
-		}
 		
 		Command autoCommand = autonomousConfiguration.getAutonomousCommand(gameData);
 		
