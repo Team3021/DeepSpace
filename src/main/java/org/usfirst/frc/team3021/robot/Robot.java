@@ -123,6 +123,7 @@ public class Robot extends TimedRobot {
 		
 		driveSystem.teleopPeriodic();
 		visionSystem.teleopPeriodic();
+		armSystem.teleopPeriodic();
 		clawSystem.teleopPeriodic();
 		elevatorSystem.teleopPeriodic();
 	}
