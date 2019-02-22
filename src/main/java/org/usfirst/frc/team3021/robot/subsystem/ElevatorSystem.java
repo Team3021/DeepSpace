@@ -3,8 +3,6 @@ package org.usfirst.frc.team3021.robot.subsystem;
 import org.usfirst.frc.team3021.robot.commands.ElevatorCommand;
 import org.usfirst.frc.team3021.robot.configuration.Preferences;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Solenoid;
 
