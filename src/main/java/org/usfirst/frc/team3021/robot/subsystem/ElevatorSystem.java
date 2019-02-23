@@ -18,8 +18,14 @@ public class ElevatorSystem extends Subsystem {
 	private Solenoid topSolenoid;
 	private Solenoid bottomSolenoid;
 	
+	private boolean isTopSolenoidExtended;
+	private boolean isBottomSolenoidExtended;
+	
 	public ElevatorSystem() {		
 		isEnabled =  Preferences.getInstance().getBoolean(PREF_ENABLED, ENABLED_DEFAULT);
+		
+		isTopSolenoidExtended = false;
+		isBottomSolenoidExtended = false;
 
 		if (isEnabled) {
 			compressor = new Compressor(0);
@@ -38,20 +44,26 @@ public class ElevatorSystem extends Subsystem {
 			return;
 		}
 
-		if (auxController.isBottomElevatorExtending()) {
+		if (auxController.isBottomElevatorSetToExtend() == true && isBottomSolenoidExtended == false) {
 			extendBottom();
+			
+			isBottomSolenoidExtended = true;
 		}
-		else if (auxController.isBottomElevatorContracting()) {
+		else if (auxController.isBottomElevatorSetToExtend() == false && isBottomSolenoidExtended == true) {
 			contractBottom();
+			
+			isBottomSolenoidExtended = false;
 		}
-		else if (auxController.isTopElevatorExtending()) {
-			extendBottom();
+		
+		if (auxController.isTopElevatorSetToExtend() == true && isTopSolenoidExtended == false) {
+			extendTop();
+			
+			isTopSolenoidExtended = true;
 		}
-		else if (auxController.isTopElevatorContracting()) {
-			contractBottom();
-		}
-		else {
-			stop();
+		else if (auxController.isTopElevatorSetToExtend() == false && isTopSolenoidExtended == true) {
+			contractTop();
+			
+			isTopSolenoidExtended = false;
 		}
 	}
 
@@ -91,13 +103,6 @@ public class ElevatorSystem extends Subsystem {
 		topSolenoid.set(false);
 	}
 	
-	public void stop() {
-		// don't do any actions as the sub system is not enabled
-		if (!isEnabled) {
-			return;
-		}
-	}
-
 	@Override
 	protected void initDefaultCommand() {
 		setDefaultCommand(new ElevatorCommand());

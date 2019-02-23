@@ -9,20 +9,20 @@ public class AuxController extends BaseController {
 	}
 	
 	protected void setButtons() {
-		buttonActions.add(new ButtonAction(1, "RIGHT_TOGGLE_BUTTON", "isLowVoltageLaunch"));
-		buttonActions.add(new ButtonAction(2, "MIDDLE_TOGGLE_BUTTON", "UNASSIGNED"));
-		buttonActions.add(new ButtonAction(3, "LEFT_TOGGLE_BUTTON", "UNASSIGNED"));
+		buttonActions.add(new ButtonAction(1, "RIGHT_TOGGLE_BUTTON", "isTopElevatorExnteded"));
+		buttonActions.add(new ButtonAction(2, "MIDDLE_TOGGLE_BUTTON", "isBottomElevatorExtended"));
+		buttonActions.add(new ButtonAction(3, "LEFT_TOGGLE_BUTTON", "isLowVoltageLaunch"));
 
 		buttonActions.add(new ButtonAction(4, "SAFETY_TRIGGER", "UNASSIGNED"));
 	
 		buttonActions.add(new ButtonAction(5, "TOP_BLUE_BUTTON", "isCollecting"));
 		buttonActions.add(new ButtonAction(8, "TOP_RED_BUTTON", "isLaunching"));
 
-		buttonActions.add(new ButtonAction(6, "MIDDLE_BLUE_BUTTON", "isBottomElevatorExtending"));
-		buttonActions.add(new ButtonAction(7, "BOTTOM_BLUE_BUTTON", "isBottomElevatorContracting"));
-	
-		buttonActions.add(new ButtonAction(9, "MIDDLE_RED_BUTTON", "isTopElevatorExtending"));
-		buttonActions.add(new ButtonAction(10, "BOTTOM_RED_BUTTON", "isTopElevatorContracting"));
+		buttonActions.add(new ButtonAction(6, "MIDDLE_BLUE_BUTTON", "UNASSIGNED"));
+		buttonActions.add(new ButtonAction(9, "MIDDLE_RED_BUTTON", "UNASSIGNED"));
+
+		buttonActions.add(new ButtonAction(7, "BOTTOM_BLUE_BUTTON", "UNASSIGNED"));
+		buttonActions.add(new ButtonAction(10, "BOTTOM_RED_BUTTON", "UNASSIGNED"));
 	}
 	
 	@Override
