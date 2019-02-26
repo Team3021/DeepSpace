@@ -103,6 +103,13 @@ public class ElevatorSystem extends Subsystem {
 		topSolenoid.set(false);
 	}
 	
+	public void stop() {
+		// don't do any actions as the sub system is not enabled
+		if (!isEnabled) {
+			return;
+		}
+	}
+
 	@Override
 	protected void initDefaultCommand() {
 		setDefaultCommand(new ElevatorCommand());
