@@ -28,8 +28,7 @@ public class ClawSystem extends Subsystem {
 
 	private WPI_TalonSRX motor;
 	
-	private Solenoid leftSolenoid;
-	private Solenoid rightSolenoid;
+	private Solenoid solenoid;
 	
 	public ClawSystem() {	
 		isEnabled =  Preferences.getInstance().getBoolean(PREF_ENABLED, ENABLED_DEFAULT);
@@ -37,8 +36,7 @@ public class ClawSystem extends Subsystem {
 		lowVoltage = Preferences.getInstance().getDouble(PREF_OUTTAKE_VOLTAGE_LOW, PREF_OUTTAKE_VOLTAGE_LOW_DEFAULT);
 
 		if (isEnabled) {
-			leftSolenoid = new Solenoid(3);
-			rightSolenoid = new Solenoid(4);
+			solenoid = new Solenoid(3);
 			
 			motor = new WPI_TalonSRX(30);
 		}
@@ -53,7 +51,7 @@ public class ClawSystem extends Subsystem {
 
 		// control the solenoid
 		// need to quickly retract after deploying
-		if (auxController.isClawDeploying()) {
+		if (mainController.isClawDeploying() || auxController.isClawDeploying()) {
 			// extend the solenoid
 			deploy();
 			
@@ -119,8 +117,7 @@ public class ClawSystem extends Subsystem {
 			return;
 		}
 		
-		leftSolenoid.set(true);
-		rightSolenoid.set(true);	
+		solenoid.set(true);
 	}
 	
 	public void contract() {
@@ -128,8 +125,7 @@ public class ClawSystem extends Subsystem {
 			return;
 		}
 		
-		leftSolenoid.set(false);
-		rightSolenoid.set(false);	
+		solenoid.set(false);
 	}
 
 	@Override
