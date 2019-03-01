@@ -89,6 +89,11 @@ public abstract class BaseController implements Controller {
 		return getRawButton("isRotatingLeft45");
 	}
 
+	@Override
+	public boolean isChangingGear() {
+		return getRawButton("isChangingGear");
+	}
+
 	// ****************************************************************************
 	// **********************             ELEVATOR           **********************
 	// ****************************************************************************

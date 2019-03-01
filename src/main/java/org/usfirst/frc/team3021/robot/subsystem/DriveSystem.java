@@ -25,7 +25,7 @@ public class DriveSystem extends Subsystem {
 	
 	private boolean isPrintingData = false;
 	private boolean printButtonPressed = false;
-
+	
 	public DriveSystem() {
 		driveController = new DriveController();
 
@@ -98,6 +98,10 @@ public class DriveSystem extends Subsystem {
 		driveController.zeroDistance();
 	}
 
+	public void changeGear() {
+		driveController.changeGear();
+	}
+
 	public void drive(DriveInput input) {
 		driveController.drive(input);
 	}
@@ -161,6 +165,10 @@ public class DriveSystem extends Subsystem {
 
 		if (mainController.isZeroEncoders() || auxController.isZeroEncoders()) {
 			zeroEncoders();
+		}
+
+		if (mainController.isChangingGear() || auxController.isChangingGear()) {
+			changeGear();
 		}
 		
 		//Checks to see if print button is pressed, but doesn't start printing yet

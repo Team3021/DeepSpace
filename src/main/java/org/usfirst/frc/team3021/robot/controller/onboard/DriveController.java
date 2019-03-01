@@ -12,6 +12,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
@@ -42,6 +43,10 @@ public class DriveController {
 	// SPEED CONTROLLERS
 	private SpeedControllerGroup leftSpeedController;
 	private SpeedControllerGroup rightSpeedController;
+
+	// GEAR SHIFTING
+	private boolean isHighGear = false;
+	private Solenoid gearShiftHigh;
 	
 	// ENCODERS
 	private CANEncoder leftEncoder;
@@ -75,6 +80,9 @@ public class DriveController {
 		robotDrive = new DifferentialDrive(leftRearSpark, rightRearSpark);
 		robotDrive.setExpiration(0.25);
 		robotDrive.setSafetyEnabled(false);
+		
+		// GEAR SHIFTER
+		gearShiftHigh = new Solenoid(0);
 		
 		// Calculate encoder distance
 		double wheelDiameter = Preferences.getInstance().getDouble(PREF_DRIVE_WHEEL_SIZE, DRIVE_WHEEL_SIZE_DEFAULT);
@@ -199,6 +207,18 @@ public class DriveController {
 			robotDrive.tankDrive(tankInput.getLeftInput(), tankInput.getRightInput());
 		}
 		
+	}
+
+	public void changeGear() {
+		if (!isHighGear) {
+			isHighGear = true;
+			
+			gearShiftHigh.set(true);
+		} else {
+			isHighGear = false;
+			
+			gearShiftHigh.set(false);
+		}
 	}
 	
 	public void stop() {
