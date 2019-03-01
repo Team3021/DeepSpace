@@ -82,17 +82,26 @@ public class Robot extends TimedRobot {
 		// Stop any commands that might be left running from another mode
 		System.out.println("Entering Autonomous Init");
 		Scheduler.getInstance().removeAll();
-		
-		Command autoCommand = autonomousConfiguration.getAutonomousCommand(gameData);
-		
-		System.out.println("AutoCommand Scheduled " + autoCommand.getName());
-		
-		Scheduler.getInstance().add(autoCommand);
+
+//		DISABLE AUTONOMOUS LOGIC
+//		
+//		Command autoCommand = autonomousConfiguration.getAutonomousCommand(gameData);
+//		
+//		System.out.println("AutoCommand Scheduled " + autoCommand.getName());
+//		
+//		Scheduler.getInstance().add(autoCommand);
 	}
 
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		
+//		REMOVE THESE LINE IF USING AUTONOMOUS LOGIC
+		driveSystem.teleopPeriodic();
+		visionSystem.teleopPeriodic();
+		armSystem.teleopPeriodic();
+		clawSystem.teleopPeriodic();
+		elevatorSystem.teleopPeriodic();
 	}
 
 	// ****************************************************************************
