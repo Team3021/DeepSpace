@@ -88,12 +88,7 @@ public class ClawSystem extends Subsystem {
 			return;
 		}
 		
-		if (auxController.isLowVoltageLaunch()) {
-			motor.set(REVERSE_MULTIPLIER * lowVoltage);
-		}
-		else {
-			motor.set(REVERSE_MULTIPLIER * voltage);
-		}
+		motor.set(REVERSE_MULTIPLIER * voltage);
 	}
 	
 	public void deliver(double speed) {

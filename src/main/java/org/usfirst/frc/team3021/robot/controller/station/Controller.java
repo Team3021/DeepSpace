@@ -44,6 +44,8 @@ public interface Controller {
 	// **********************               ARM             **********************
 	// ****************************************************************************
 	
+	boolean isMovingWrist();
+	
 	boolean isArmForward();
 	
 	boolean isArmBackward();

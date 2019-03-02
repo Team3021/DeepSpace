@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3021.robot.configuration;
 
 import org.usfirst.frc.team3021.robot.controller.station.AttackThreeController;
+import org.usfirst.frc.team3021.robot.controller.station.AttackThreeSecondaryController;
 import org.usfirst.frc.team3021.robot.controller.station.AuxController;
 import org.usfirst.frc.team3021.robot.controller.station.Controller;
 import org.usfirst.frc.team3021.robot.controller.station.DefaultController;
@@ -27,16 +28,22 @@ public class ControllerConfiguration extends BaseConfiguration {
 	private final int AUX_PANEL_PORT_DEFAULT = 1;
 	
 	private static Controller mainController;
+	private static Controller secondaryController;
 	private static Controller auxController;
 
 	public ControllerConfiguration() {
 		mainController = initializeMainController();
+		secondaryController = initializeSecondaryController();
 
 		auxController = initializeAuxController();
 	}
 
 	public Controller getMainController() {
 		return mainController;
+	}
+
+	public Controller getSecondaryController() {
+		return secondaryController;
 	}
 
 	public Controller getAuxController() {
@@ -98,6 +105,11 @@ public class ControllerConfiguration extends BaseConfiguration {
 		}
 		
 		return mainController;
+	}
+
+	private Controller initializeSecondaryController() {
+		Controller secondaryController = new AttackThreeSecondaryController(this, 2);
+		return secondaryController;
 	}
 
 	private Controller initializeAuxController() {

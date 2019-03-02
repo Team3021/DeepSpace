@@ -113,6 +113,11 @@ public abstract class BaseController implements Controller {
 	// ****************************************************************************
 	
 	@Override
+	public boolean isMovingWrist() {
+		return getRawButton("isMovingWrist");
+	}
+	
+	@Override
 	public boolean isArmForward() {
 		return getRawButton("isArmForward");
 	}

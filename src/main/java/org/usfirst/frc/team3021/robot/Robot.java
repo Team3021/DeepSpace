@@ -30,6 +30,7 @@ public class Robot extends TimedRobot {
 	private static VisionSystem visionSystem;
 	
 	private Controller mainController;
+	private Controller secondaryController;
 	private Controller auxController;
 	
 	private static String gameData = "";
@@ -64,13 +65,14 @@ public class Robot extends TimedRobot {
 		System.out.println("Robot initializing...");
 		
 		mainController = controllerConfiguration.getMainController();
+		secondaryController = controllerConfiguration.getSecondaryController();
 		auxController = controllerConfiguration.getAuxController();
 
-		driveSystem.setControllers(mainController, auxController);
-		visionSystem.setControllers(mainController, auxController);
-		armSystem.setControllers(mainController, auxController);
-		clawSystem.setControllers(mainController, auxController);
-		elevatorSystem.setControllers(mainController, auxController);
+		driveSystem.setControllers(mainController, secondaryController, auxController);
+		visionSystem.setControllers(mainController, secondaryController, auxController);
+		armSystem.setControllers(mainController, secondaryController, auxController);
+		clawSystem.setControllers(mainController, secondaryController, auxController);
+		elevatorSystem.setControllers(mainController, secondaryController, auxController);
 	}
 
 	// ****************************************************************************
@@ -119,7 +121,7 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 		
 		driveSystem.teleopPeriodic();
-		visionSystem.teleopPeriodic();
+//		visionSystem.teleopPeriodic();
 		armSystem.teleopPeriodic();
 		clawSystem.teleopPeriodic();
 		elevatorSystem.teleopPeriodic();

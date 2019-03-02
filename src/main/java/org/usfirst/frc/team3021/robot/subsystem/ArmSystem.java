@@ -4,6 +4,7 @@ import org.usfirst.frc.team3021.robot.commands.ArmCommand;
 import org.usfirst.frc.team3021.robot.configuration.Dashboard;
 import org.usfirst.frc.team3021.robot.configuration.Preferences;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
@@ -40,14 +41,19 @@ public class ArmSystem extends Subsystem {
 		wristVoltage = Preferences.getInstance().getDouble(PREF_WRIST_VOLTAGE, WRIST_VOLTAGE_DEFAULT);
 
 		if (isEnabled) {
-			elbowMotor = new WPI_TalonSRX(41);
-			wristMotor = new WPI_TalonSRX(42);
+			elbowMotor = new WPI_TalonSRX(42);
+			wristMotor = new WPI_TalonSRX(41);
 			
-			elbowPosition = new AnalogPotentiometer(0, 360, 30);  // TODO determine the 0 point offset of the potentiometer
-			wristPosition = new AnalogPotentiometer(1, 360, 30);  // TODO determine the 0 point offset of the potentiometer
+			// Enable  the brake mode for neutral
+			elbowMotor.setNeutralMode(NeutralMode.Brake);
+			wristMotor.setNeutralMode(NeutralMode.Brake);
+			
+			elbowPosition = new AnalogPotentiometer(0, 360, 180);  // TODO determine the 0 point offset of the potentiometer
+			wristPosition = new AnalogPotentiometer(1, 360, 180);  // TODO determine the 0 point offset of the potentiometer
 		}
 	}
 
+	
 	@Override
 	public void teleopPeriodic() {
 		// don't do any actions as the sub system is not enabled
@@ -58,26 +64,22 @@ public class ArmSystem extends Subsystem {
 		// display the position values
 		printArmPositions();
 		
-		// Control the arm motor
-		if (mainController.isArmForward() || auxController.isArmForward()) {
-			armForward();
-		}
-		else if (mainController.isArmBackward() || auxController.isArmBackward()) {
-			armBackward();
-		}
-		else {
-			stopArm();
-		}
+		boolean isMovingWrist = secondaryController.isMovingWrist();
 
-		// Control the wrist motor
-		if (mainController.isWristBackward() || auxController.isWristBackward()) {
-			wristForward();
-		}
-		else if (mainController.isWristBackward() || auxController.isWristBackward()) {
-			wristBackward();
+		System.out.println("isMovingWrist" + isMovingWrist);
+		
+		// Control the arm motor
+		if (isMovingWrist) {
+			wristVoltage = secondaryController.getMoveValue();
+			wristMotor.set(wristVoltage);
+			
+			elbowMotor.set(0);
 		}
 		else {
-			stopWrist();
+			elbowVoltage = secondaryController.getMoveValue();
+			elbowMotor.set(elbowVoltage);
+			
+			wristMotor.set(0);
 		}
 	}
 	
