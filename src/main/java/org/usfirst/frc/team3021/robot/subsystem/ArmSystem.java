@@ -17,12 +17,12 @@ public class ArmSystem extends Subsystem {
 	private boolean isEnabled = ENABLED_DEFAULT;
 
 	private static final String PREF_ELBOW_VOLTAGE = "Arm.elblow.motor.voltage";
-	private static final double ELBOW_VOLTAGE_DEFAULT = 0.7;
+	private static final double ELBOW_VOLTAGE_DEFAULT = 0.5;
 
 	private double elbowVoltage = ELBOW_VOLTAGE_DEFAULT;
 
 	private static final String PREF_WRIST_VOLTAGE = "Arm.wrist.motor.voltage";
-	private static final double WRIST_VOLTAGE_DEFAULT = 0.7;
+	private static final double WRIST_VOLTAGE_DEFAULT = 0.3;
 
 	private double wristVoltage = WRIST_VOLTAGE_DEFAULT;
 	
@@ -65,21 +65,28 @@ public class ArmSystem extends Subsystem {
 		printArmPositions();
 		
 		boolean isMovingWrist = secondaryController.isMovingWrist();
-
-		System.out.println("isMovingWrist" + isMovingWrist);
 		
-		// Control the arm motor
-		if (isMovingWrist) {
-			wristVoltage = secondaryController.getMoveValue();
+		double moveValue = Math.abs(secondaryController.getMoveValue());
+
+		boolean isJoystickMotion = moveValue > 0.4;
+		
+		// Control the arm motors
+		// Move the wrist
+		if (isJoystickMotion && isMovingWrist) {
 			wristMotor.set(wristVoltage);
 			
 			elbowMotor.set(0);
 		}
-		else {
-			elbowVoltage = secondaryController.getMoveValue();
+		// Move the elbow
+		else if (isJoystickMotion && !isMovingWrist) {
 			elbowMotor.set(elbowVoltage);
 			
 			wristMotor.set(0);
+		}
+		// Send stop signal
+		else {
+			stopWrist();
+			stopArm();
 		}
 	}
 	
