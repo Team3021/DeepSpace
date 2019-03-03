@@ -7,9 +7,8 @@ import org.usfirst.frc.team3021.robot.inputs.DriveInput;
 import org.usfirst.frc.team3021.robot.inputs.LeftRightDriveInput;
 import org.usfirst.frc.team3021.robot.inputs.TankDriveInput;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANEncoder;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -24,21 +23,9 @@ public class DriveController {
 	// DRIVE SYSTEM
 	private DifferentialDrive robotDrive;
 	
-	// TALON PORTS
-	private static final int RIGHT_TOP_PORT = 11;
-	private static final int RIGHT_FRONT_PORT = 12;
-	private static final int RIGHT_REAR_PORT = 13;
-	private static final int LEFT_TOP_PORT = 22;
-	private static final int LEFT_REAR_PORT = 21;
-	private static final int LEFT_FRONT_PORT = 23;
-
-	// SPARK MAX CONTROLLERS
-	private CANSparkMax rightTopSpark;
-	private CANSparkMax rightRearSpark;
-	private CANSparkMax rightFrontSpark;
-	private CANSparkMax leftTopSpark;
-	private CANSparkMax leftRearSpark;
-	private CANSparkMax leftFrontSpark;
+	private WPI_TalonSRX leftMotor;
+	private WPI_TalonSRX rightMotor;
+	
 	
 	// SPEED CONTROLLERS
 	private SpeedControllerGroup leftSpeedController;
@@ -61,41 +48,30 @@ public class DriveController {
 	private double currentTurnValue = 0.0f;
 	
 	public DriveController() {
-		// SPARKS
-		leftTopSpark = new CANSparkMax(LEFT_TOP_PORT, MotorType.kBrushless);
-		leftFrontSpark = new CANSparkMax(LEFT_FRONT_PORT, MotorType.kBrushless);
-		leftRearSpark = new CANSparkMax(LEFT_REAR_PORT, MotorType.kBrushless);
-		rightTopSpark = new CANSparkMax(RIGHT_TOP_PORT, MotorType.kBrushless);
-		rightFrontSpark = new CANSparkMax(RIGHT_FRONT_PORT, MotorType.kBrushless);
-		rightRearSpark = new CANSparkMax(RIGHT_REAR_PORT, MotorType.kBrushless);
-
-		// Invert top motors in the gear boxes
-		leftTopSpark.setInverted(true);
-		rightTopSpark.setInverted(true);
+		 rightMotor = new WPI_TalonSRX(21);
+		 
+		 leftMotor = new WPI_TalonSRX(11);
+		 
+		 rightMotor.setInverted(true);
 		
 		// DRIVE DECLARATION
-		leftSpeedController = new SpeedControllerGroup(leftFrontSpark, leftRearSpark, leftTopSpark);
-		rightSpeedController = new SpeedControllerGroup(rightFrontSpark, rightRearSpark, rightTopSpark);
+		leftSpeedController = new SpeedControllerGroup(leftMotor);
+		rightSpeedController = new SpeedControllerGroup(rightMotor);
+
+		robotDrive = new DifferentialDrive(leftSpeedController, rightSpeedController);
 		
-		robotDrive = new DifferentialDrive(leftRearSpark, rightRearSpark);
 		robotDrive.setExpiration(0.25);
 		robotDrive.setSafetyEnabled(false);
 		
 		// GEAR SHIFTER
 		gearShiftHigh = new Solenoid(0);
-		
+			
 		// Calculate encoder distance
 		double wheelDiameter = Preferences.getInstance().getDouble(PREF_DRIVE_WHEEL_SIZE, DRIVE_WHEEL_SIZE_DEFAULT);
 		
 		final double wheelCircumerence = wheelDiameter * Math.PI;
 		final double distancePerPulse = (wheelCircumerence / PULSE_PER_ROTATION) / INCHES_PER_FOOT;
 		
-		// ENCODERS
-		leftEncoder = new CANEncoder(leftTopSpark);
-		leftEncoder.setPositionConversionFactor(distancePerPulse);
-		
-		rightEncoder = new CANEncoder(rightTopSpark);
-		rightEncoder.setPositionConversionFactor(distancePerPulse);
 	}
 
 	// ****************************************************************************
@@ -116,14 +92,7 @@ public class DriveController {
 
 	public double getMotorOutput() {
 		
-		Dashboard.putNumber("Drive : Motor Voltage : Left Top", leftTopSpark.getAppliedOutput());
-		Dashboard.putNumber("Drive : Motor Voltage : Left Front", leftFrontSpark.getAppliedOutput());
-		Dashboard.putNumber("Drive : Motor Voltage : Left Rear", leftRearSpark.getAppliedOutput());
-		Dashboard.putNumber("Drive : Motor Voltage : Right Top", rightTopSpark.getAppliedOutput());
-		Dashboard.putNumber("Drive : Motor Voltage : Right Front", rightFrontSpark.getAppliedOutput());
-		Dashboard.putNumber("Drive : Motor Voltage : Right Rear", rightRearSpark.getAppliedOutput());
-		
-		return (leftRearSpark.getAppliedOutput() + rightRearSpark.getAppliedOutput()) / 2;
+		return 0.00;
 	}
 
 	public double getLeftMotorInput() {
