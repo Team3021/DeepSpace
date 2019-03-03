@@ -48,6 +48,8 @@ public class ArmSystem extends Subsystem {
 			elbowMotor.setNeutralMode(NeutralMode.Brake);
 			wristMotor.setNeutralMode(NeutralMode.Brake);
 			
+			wristMotor.setInverted(true);
+			
 			elbowPosition = new AnalogPotentiometer(0, 360, 180);  // TODO determine the 0 point offset of the potentiometer
 			wristPosition = new AnalogPotentiometer(1, 360, 180);  // TODO determine the 0 point offset of the potentiometer
 		}
