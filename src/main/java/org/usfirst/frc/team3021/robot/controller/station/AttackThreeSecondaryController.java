@@ -12,7 +12,7 @@ public class AttackThreeSecondaryController extends BaseController {
 		buttonActions.add(new ButtonAction(1, "STICK_TRIGGER", "isMovingWrist"));
 		
 		buttonActions.add(new ButtonAction(2, "STICK_MIDDLE_BUTTON", "UNASSIGNED"));
-		buttonActions.add(new ButtonAction(3, "STICK_CENTER", "UNASSIGNED"));
+		buttonActions.add(new ButtonAction(3, "STICK_CENTER", "UNASSIGNED"));;
 		buttonActions.add(new ButtonAction(4, "STICK_LEFT_BUTTON", "UNASSIGNED"));
 		buttonActions.add(new ButtonAction(5, "STICK_RIGHT_BUTTON", "UNASSIGNED"));
 	
