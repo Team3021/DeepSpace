@@ -9,6 +9,8 @@ import org.usfirst.frc.team3021.robot.inputs.TankDriveInput;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANEncoder;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -23,10 +25,6 @@ public class DriveController {
 	// DRIVE SYSTEM
 	private DifferentialDrive robotDrive;
 	
-	private WPI_TalonSRX leftMotor;
-	private WPI_TalonSRX rightMotor;
-	
-	
 	// SPEED CONTROLLERS
 	private SpeedControllerGroup leftSpeedController;
 	private SpeedControllerGroup rightSpeedController;
@@ -34,10 +32,6 @@ public class DriveController {
 	// GEAR SHIFTING
 	private boolean isHighGear = false;
 	private Solenoid gearShiftHigh;
-	
-	// ENCODERS
-	private CANEncoder leftEncoder;
-	private CANEncoder rightEncoder;
 	
 	// DISTANCE
 	private static final int PULSE_PER_ROTATION = 256;
@@ -48,30 +42,31 @@ public class DriveController {
 	private double currentTurnValue = 0.0f;
 	
 	public DriveController() {
-		 rightMotor = new WPI_TalonSRX(21);
-		 
-		 leftMotor = new WPI_TalonSRX(11);
-		 
-		 rightMotor.setInverted(true);
-		
+		WPI_TalonSRX rightTalon = new WPI_TalonSRX(21);
+
+		rightTalon.setInverted(true);
+
+		CANSparkMax leftSpark = new CANSparkMax(23, MotorType.kBrushless);
+
+
 		// DRIVE DECLARATION
-		leftSpeedController = new SpeedControllerGroup(leftMotor);
-		rightSpeedController = new SpeedControllerGroup(rightMotor);
+		leftSpeedController = new SpeedControllerGroup(leftSpark);
+		rightSpeedController = new SpeedControllerGroup(rightTalon);
 
 		robotDrive = new DifferentialDrive(leftSpeedController, rightSpeedController);
-		
+
 		robotDrive.setExpiration(0.25);
 		robotDrive.setSafetyEnabled(false);
-		
+
 		// GEAR SHIFTER
 		gearShiftHigh = new Solenoid(0);
-			
+
 		// Calculate encoder distance
 		double wheelDiameter = Preferences.getInstance().getDouble(PREF_DRIVE_WHEEL_SIZE, DRIVE_WHEEL_SIZE_DEFAULT);
-		
+
 		final double wheelCircumerence = wheelDiameter * Math.PI;
 		final double distancePerPulse = (wheelCircumerence / PULSE_PER_ROTATION) / INCHES_PER_FOOT;
-		
+
 	}
 
 	// ****************************************************************************
@@ -108,8 +103,6 @@ public class DriveController {
 	// ****************************************************************************
 	
 	public void printEncoderValues() {
-		Dashboard.putNumber("Drive : Encoder Pulses Left: ", leftEncoder.getPosition());
-		Dashboard.putNumber("Drive : Encoder Pulses Right: ", rightEncoder.getPosition());
 	}
 
 	public void printEncoderDistance(double distance) {
@@ -134,17 +127,14 @@ public class DriveController {
 	}
 
 	public double getLeftEncoderDistance() {
-		return leftEncoder.getPosition();
+		return 0;
 	}
 	
 	public double getRightEncoderDistance() {
-		return rightEncoder.getPosition();
+		return 0;
 	}
 	public void zeroDistance() {
 		System.out.println("Zero encoders");
-		
-		leftEncoder.setPosition(0);
-		rightEncoder.setPosition(0);
 	}
 
 	public double getDistanceTraveled(Encoder driveEncoder) {
