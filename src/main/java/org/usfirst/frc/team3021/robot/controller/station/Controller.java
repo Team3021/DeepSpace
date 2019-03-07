@@ -36,9 +36,9 @@ public interface Controller {
 	// **********************             ELEVATOR            *********************
 	// ****************************************************************************
 
-	boolean isBottomElevatorSetToExtend();
+	boolean isAuxStickDown();
 	
-	boolean isTopElevatorSetToExtend();
+	boolean isAuxStickUp();
 	
 	// ****************************************************************************
 	// **********************               ARM             **********************

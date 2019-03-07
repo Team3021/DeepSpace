@@ -99,13 +99,13 @@ public abstract class BaseController implements Controller {
 	// ****************************************************************************
 
 	@Override
-	public boolean isBottomElevatorSetToExtend() {
-		return getRawButton("isBottomElevatorSetToExtend");
+	public boolean isAuxStickDown() {
+		return getRawButton("isAuxStickDown");
 	}
 	
 	@Override
-	public boolean isTopElevatorSetToExtend() {
-		return getRawButton("isTopElevatorSetToExtend");
+	public boolean isAuxStickUp() {
+		return getRawButton("isAuxStickUp");
 	}
 	
 	// ****************************************************************************

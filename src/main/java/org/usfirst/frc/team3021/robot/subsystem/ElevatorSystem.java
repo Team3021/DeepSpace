@@ -44,23 +44,23 @@ public class ElevatorSystem extends Subsystem {
 			return;
 		}
 
-		if (auxController.isBottomElevatorSetToExtend() == true && isBottomSolenoidExtended == false) {
+		if (auxController.isAuxStickDown() == false && auxController.isAuxStickUp() == false && isBottomSolenoidExtended == false) {
 			extendBottom();
 			
 			isBottomSolenoidExtended = true;
 		}
-		else if (auxController.isBottomElevatorSetToExtend() == false && isBottomSolenoidExtended == true) {
+		else if (auxController.isAuxStickDown() == true && auxController.isAuxStickUp() == false  && isBottomSolenoidExtended == true) {
 			contractBottom();
 			
 			isBottomSolenoidExtended = false;
 		}
 		
-		if (auxController.isTopElevatorSetToExtend() == true && isTopSolenoidExtended == false) {
+		if (auxController.isAuxStickDown() == false && auxController.isAuxStickUp() == true && isTopSolenoidExtended == false) {
 			extendTop();
 			
 			isTopSolenoidExtended = true;
 		}
-		else if (auxController.isTopElevatorSetToExtend() == false && isTopSolenoidExtended == true) {
+		else if (auxController.isAuxStickDown() == false && auxController.isAuxStickUp() == false && isTopSolenoidExtended == true) {
 			contractTop();
 			
 			isTopSolenoidExtended = false;
