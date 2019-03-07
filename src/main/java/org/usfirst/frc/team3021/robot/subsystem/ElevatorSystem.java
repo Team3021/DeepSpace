@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3021.robot.subsystem;
 
 import org.usfirst.frc.team3021.robot.commands.ElevatorCommand;
+import org.usfirst.frc.team3021.robot.configuration.Dashboard;
 import org.usfirst.frc.team3021.robot.configuration.Preferences;
 
 import edu.wpi.first.wpilibj.Compressor;
@@ -65,6 +66,9 @@ public class ElevatorSystem extends Subsystem {
 			
 			isTopSolenoidExtended = false;
 		}
+		
+		Dashboard.putString("Elevator : BOTTOM : Extended", new String("" + isBottomSolenoidExtended).toUpperCase());
+		Dashboard.putString("Elevator : TOP : Extended", new String("" + isTopSolenoidExtended).toUpperCase());
 	}
 
 	public void extendBottom() {
