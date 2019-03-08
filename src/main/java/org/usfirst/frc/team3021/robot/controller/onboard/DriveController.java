@@ -181,18 +181,18 @@ public class DriveController {
 		
 	}
 
-	public void changeGear() {
-		if (!isHighGear) {
-			isHighGear = true;
-			
-			gearShiftLow.set(false);
-			gearShiftHigh.set(true);
-		} else {
-			isHighGear = false;
-			
-			gearShiftLow.set(true);
-			gearShiftHigh.set(false);
-		}
+	public void enableLowGear() {
+		isHighGear = false;
+
+		gearShiftLow.set(true);
+		gearShiftHigh.set(false);
+	}
+
+	public void enableHighGear() {
+		isHighGear = true;
+
+		gearShiftLow.set(false);
+		gearShiftHigh.set(true);
 	}
 	
 	public void stop() {

@@ -98,8 +98,12 @@ public class DriveSystem extends Subsystem {
 		driveController.zeroDistance();
 	}
 
-	public void changeGear() {
-		driveController.changeGear();
+	public void enableLowGear() {
+		driveController.enableLowGear();
+	}
+
+	public void enableHighGear() {
+		driveController.enableHighGear();
 	}
 
 	public void drive(DriveInput input) {
@@ -167,8 +171,10 @@ public class DriveSystem extends Subsystem {
 			zeroEncoders();
 		}
 
-		if (mainController.isChangingGear() || auxController.isChangingGear()) {
-			changeGear();
+		if (mainController.isHoldingHighGear() || auxController.isHoldingHighGear()) {
+			enableHighGear();
+		} else {
+			enableLowGear();
 		}
 		
 		//Checks to see if print button is pressed, but doesn't start printing yet

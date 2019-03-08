@@ -30,7 +30,7 @@ public interface Controller {
 
 	boolean isRotatingLeft45();
 
-	boolean isChangingGear();
+	boolean isHoldingHighGear();
 
 	// ****************************************************************************
 	// **********************             ELEVATOR            *********************

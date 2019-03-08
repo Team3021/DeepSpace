@@ -9,7 +9,8 @@ public class AttackThreeController extends BaseController {
 	}
 
 	protected void setButtons() {
-		buttonActions.add(new ButtonAction(1, "STICK_TRIGGER", "UNASSIGNED"));
+		buttonActions.add(new ButtonAction(1, "STICK_TRIGGER", "isHoldingHighGear"));
+		
 		buttonActions.add(new ButtonAction(2, "STICK_MIDDLE_BUTTON", "UNASSIGNED"));
 		buttonActions.add(new ButtonAction(3, "STICK_CENTER", "UNASSIGNED"));
 		buttonActions.add(new ButtonAction(4, "STICK_LEFT_BUTTON", "UNASSIGNED"));

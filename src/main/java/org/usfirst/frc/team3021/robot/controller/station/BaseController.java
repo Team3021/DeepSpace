@@ -90,8 +90,8 @@ public abstract class BaseController implements Controller {
 	}
 
 	@Override
-	public boolean isChangingGear() {
-		return getRawButton("isChangingGear");
+	public boolean isHoldingHighGear() {
+		return getRawButton("isHoldingHighGear");
 	}
 
 	// ****************************************************************************
