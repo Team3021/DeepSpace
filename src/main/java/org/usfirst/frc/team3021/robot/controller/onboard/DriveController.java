@@ -10,6 +10,7 @@ import org.usfirst.frc.team3021.robot.inputs.TankDriveInput;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.ExternalFollower;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Encoder;
@@ -31,6 +32,8 @@ public class DriveController {
 
 	// GEAR SHIFTING
 	private boolean isHighGear = false;
+	
+	private Solenoid gearShiftLow;
 	private Solenoid gearShiftHigh;
 	
 	// DISTANCE
@@ -42,15 +45,24 @@ public class DriveController {
 	private double currentTurnValue = 0.0f;
 	
 	public DriveController() {
+		// Right side of robot
 		WPI_TalonSRX rightTalon = new WPI_TalonSRX(21);
 
+		// TODO check if this needs to inverted
 		rightTalon.setInverted(true);
+		
+		// Right Spark Max to follow the Right TalonSRX
+		CANSparkMax rightSpark = new CANSparkMax(11, MotorType.kBrushless);
+		rightSpark.follow(ExternalFollower.kFollowerPhoenix, 21);
 
+		// Left side of robot
+		WPI_TalonSRX leftTalon = new WPI_TalonSRX(22);
+		
 		CANSparkMax leftSpark = new CANSparkMax(23, MotorType.kBrushless);
-
-
+		leftSpark.follow(ExternalFollower.kFollowerPhoenix, 22);
+		
 		// DRIVE DECLARATION
-		leftSpeedController = new SpeedControllerGroup(leftSpark);
+		leftSpeedController = new SpeedControllerGroup(leftTalon);
 		rightSpeedController = new SpeedControllerGroup(rightTalon);
 
 		robotDrive = new DifferentialDrive(leftSpeedController, rightSpeedController);
@@ -59,7 +71,8 @@ public class DriveController {
 		robotDrive.setSafetyEnabled(false);
 
 		// GEAR SHIFTER
-		gearShiftHigh = new Solenoid(0);
+		gearShiftLow = new Solenoid(4);
+		gearShiftHigh = new Solenoid(5);
 
 		// Calculate encoder distance
 		double wheelDiameter = Preferences.getInstance().getDouble(PREF_DRIVE_WHEEL_SIZE, DRIVE_WHEEL_SIZE_DEFAULT);
@@ -172,10 +185,12 @@ public class DriveController {
 		if (!isHighGear) {
 			isHighGear = true;
 			
+			gearShiftLow.set(false);
 			gearShiftHigh.set(true);
 		} else {
 			isHighGear = false;
 			
+			gearShiftLow.set(true);
 			gearShiftHigh.set(false);
 		}
 	}

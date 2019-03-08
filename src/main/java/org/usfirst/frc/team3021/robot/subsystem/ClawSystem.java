@@ -18,11 +18,7 @@ public class ClawSystem extends Subsystem {
 	private static final String PREF_VOLTAGE = "Claw.motor.voltage";
 	private static final double VOLTAGE_DEFAULT = 0.7;
 
-	private static final String PREF_OUTTAKE_VOLTAGE_LOW = "Claw.motor.voltage.outtake.low";
-	private static final double PREF_OUTTAKE_VOLTAGE_LOW_DEFAULT = 0.3;
-
 	private double voltage = VOLTAGE_DEFAULT;
-	private double lowVoltage = 0.5;
 	
 	private static final double REVERSE_MULTIPLIER = -1.0;
 
@@ -33,10 +29,9 @@ public class ClawSystem extends Subsystem {
 	public ClawSystem() {	
 		isEnabled =  Preferences.getInstance().getBoolean(PREF_ENABLED, ENABLED_DEFAULT);
 		voltage = Preferences.getInstance().getDouble(PREF_VOLTAGE, VOLTAGE_DEFAULT);
-		lowVoltage = Preferences.getInstance().getDouble(PREF_OUTTAKE_VOLTAGE_LOW, PREF_OUTTAKE_VOLTAGE_LOW_DEFAULT);
 
 		if (isEnabled) {
-			solenoid = new Solenoid(3);
+			solenoid = new Solenoid(7);
 			
 			motor = new WPI_TalonSRX(30);
 		}

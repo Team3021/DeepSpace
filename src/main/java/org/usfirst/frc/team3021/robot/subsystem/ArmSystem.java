@@ -68,20 +68,26 @@ public class ArmSystem extends Subsystem {
 		
 		boolean isMovingWrist = secondaryController.isMovingWrist();
 		
-		double moveValue = Math.abs(secondaryController.getMoveValue());
-
-		boolean isJoystickMotion = moveValue > 0.4;
+		double moveValue = secondaryController.getMoveValue();
+		
+		double directionMultiplier = 1.0;
+		
+		if (moveValue < 0) {
+			directionMultiplier = -1.0;
+		}
+		
+		boolean isJoystickMotion = Math.abs(moveValue) > 0.2;
 		
 		// Control the arm motors
 		// Move the wrist
 		if (isJoystickMotion && isMovingWrist) {
-			wristMotor.set(wristVoltage);
+			wristMotor.set(wristVoltage * directionMultiplier);
 			
 			elbowMotor.set(0);
 		}
 		// Move the elbow
 		else if (isJoystickMotion && !isMovingWrist) {
-			elbowMotor.set(elbowVoltage);
+			elbowMotor.set(elbowVoltage * directionMultiplier);
 			
 			wristMotor.set(0);
 		}

@@ -56,7 +56,7 @@ public class VisionSystem extends Subsystem {
 	}
 	
 	private boolean isCamera1Enabled() {
-		return Preferences.getInstance().getBoolean(PREF_VISION_CAMERA_1_ENABLED, true);
+		return Preferences.getInstance().getBoolean(PREF_VISION_CAMERA_1_ENABLED, false);
 	}
 	
 	public boolean isVisionEnabled() {
@@ -93,6 +93,7 @@ public class VisionSystem extends Subsystem {
 
 			cam0.setFPS(20);
 			cam0.setResolution(TargetElement.FRAME_WIDTH, TargetElement.FRAME_HEIGHT);
+			cam0.setBrightness(10);
 		}
 
 		// set up a usb camera on port 1

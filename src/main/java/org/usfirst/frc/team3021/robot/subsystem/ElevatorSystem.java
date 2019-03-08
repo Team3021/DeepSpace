@@ -16,8 +16,11 @@ public class ElevatorSystem extends Subsystem {
 	
 	private static Compressor compressor;
 	
-	private Solenoid topSolenoid;
-	private Solenoid bottomSolenoid;
+	private Solenoid topSolenoidDown;
+	private Solenoid topSolenoidUp;
+	
+	private Solenoid bottomSolenoidDown;
+	private Solenoid bottomSolenoidUp;
 	
 	private boolean isTopSolenoidExtended;
 	private boolean isBottomSolenoidExtended;
@@ -32,8 +35,11 @@ public class ElevatorSystem extends Subsystem {
 			compressor = new Compressor(0);
 			compressor.setClosedLoopControl(true);
 
-			topSolenoid = new Solenoid(1);
-			bottomSolenoid = new Solenoid(2);
+			topSolenoidDown = new Solenoid(0);
+			topSolenoidUp = new Solenoid(1);
+			
+			bottomSolenoidDown = new Solenoid(2);
+			bottomSolenoidUp = new Solenoid(3);
 		}
 
 	}
@@ -77,7 +83,8 @@ public class ElevatorSystem extends Subsystem {
 			return;
 		}
 		
-		bottomSolenoid.set(true);
+		bottomSolenoidDown.set(false);
+		bottomSolenoidUp.set(true);
 	}
 	
 	public void contractBottom() {
@@ -86,7 +93,8 @@ public class ElevatorSystem extends Subsystem {
 			return;
 		}
 		
-		bottomSolenoid.set(false);
+		bottomSolenoidDown.set(true);
+		bottomSolenoidUp.set(false);
 	}
 
 	public void extendTop() {
@@ -95,7 +103,8 @@ public class ElevatorSystem extends Subsystem {
 			return;
 		}
 		
-		topSolenoid.set(true);
+		topSolenoidDown.set(false);
+		topSolenoidUp.set(true);
 	}
 	
 	public void contractTop() {
@@ -104,7 +113,7 @@ public class ElevatorSystem extends Subsystem {
 			return;
 		}
 		
-		topSolenoid.set(false);
+		topSolenoidDown.set(false);
 	}
 	
 	public void stop() {
