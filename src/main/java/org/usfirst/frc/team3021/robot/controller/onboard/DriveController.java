@@ -52,12 +52,15 @@ public class DriveController {
 		rightTalon.setInverted(true);
 		
 		// Right Spark Max to follow the Right TalonSRX
+		// TODO: SHIVANG remove these TWO lines if the spark max are not working
 		CANSparkMax rightSpark = new CANSparkMax(11, MotorType.kBrushless);
 		rightSpark.follow(ExternalFollower.kFollowerPhoenix, 21);
 
 		// Left side of robot
 		WPI_TalonSRX leftTalon = new WPI_TalonSRX(22);
 		
+		// Left Spark Max to follow the Left TalonSRX
+		// TODO: SHIVANG remove these TWO lines if the spark max are not working
 		CANSparkMax leftSpark = new CANSparkMax(23, MotorType.kBrushless);
 		leftSpark.follow(ExternalFollower.kFollowerPhoenix, 22);
 		
