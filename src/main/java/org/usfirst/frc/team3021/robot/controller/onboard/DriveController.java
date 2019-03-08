@@ -48,7 +48,7 @@ public class DriveController {
 		// Right side of robot
 		WPI_TalonSRX rightTalon = new WPI_TalonSRX(21);
 
-		// TODO check if this needs to inverted
+		// invert the top motor due to being mounted at the top of the gear box
 		rightTalon.setInverted(true);
 		
 		// Right Spark Max to follow the Right TalonSRX
@@ -71,8 +71,8 @@ public class DriveController {
 		robotDrive.setSafetyEnabled(false);
 
 		// GEAR SHIFTER
-		gearShiftLow = new Solenoid(4);
-		gearShiftHigh = new Solenoid(5);
+		gearShiftLow = new Solenoid(4);  // TODO: SHIVANG is port 4 low gear ? Switch these ports if it is backwards
+		gearShiftHigh = new Solenoid(5); // TODO: SHIVANG is port 5 high gear ?  Switch these ports if it is backwards
 
 		// Calculate encoder distance
 		double wheelDiameter = Preferences.getInstance().getDouble(PREF_DRIVE_WHEEL_SIZE, DRIVE_WHEEL_SIZE_DEFAULT);
