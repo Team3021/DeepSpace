@@ -102,7 +102,7 @@ public class VisionProcessor extends RunnableDevice {
 		}
 
 		// Give the frame to the output
-		Core.rotate(mat, mat, Core.ROTATE_90_COUNTERCLOCKWISE);
+//		Core.rotate(mat, mat, Core.ROTATE_90_COUNTERCLOCKWISE);
 		output.putFrame(mat);
 
 		delay(100);
