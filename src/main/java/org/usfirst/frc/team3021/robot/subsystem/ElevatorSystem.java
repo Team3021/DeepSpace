@@ -51,26 +51,42 @@ public class ElevatorSystem extends Subsystem {
 			return;
 		}
 
-		if (auxController.isAuxStickDown() == false && auxController.isAuxStickUp() == false && isBottomSolenoidExtended == false) {
-			extendBottom();
-			
-			isBottomSolenoidExtended = true;
-		}
-		else if (auxController.isAuxStickDown() == true && auxController.isAuxStickUp() == false  && isBottomSolenoidExtended == true) {
+		// three way switch is in the bottom position
+		if (auxController.isAuxStickDown() == true && auxController.isAuxStickUp() == false) {
 			contractBottom();
 			
 			isBottomSolenoidExtended = false;
 		}
+		// Three way switch is in the middle position
+		else if (auxController.isAuxStickDown() == false && auxController.isAuxStickUp() == false) {
+			extendBottom();
+			
+			isBottomSolenoidExtended = true;
+		}
+		// Three way switch is in the top position
+		else if (auxController.isAuxStickDown() == false && auxController.isAuxStickUp() == true) {
+			extendBottom();
+			
+			isBottomSolenoidExtended = true;
+		}
 		
-		if (auxController.isAuxStickDown() == false && auxController.isAuxStickUp() == true && isTopSolenoidExtended == false) {
+		// Three way switch in the middle position
+		if (auxController.isAuxStickDown() == false && auxController.isAuxStickUp() == false) {
+			contractTop();
+			
+			isTopSolenoidExtended = false;
+		}
+		// Three way switch in the top position
+		else if (auxController.isAuxStickDown() == false && auxController.isAuxStickUp() == true) {
 			extendTop();
 			
 			isTopSolenoidExtended = true;
 		}
-		else if (auxController.isAuxStickDown() == false && auxController.isAuxStickUp() == false && isTopSolenoidExtended == true) {
+		// Three way switch in the bottom position
+		else if (auxController.isAuxStickDown() == true && auxController.isAuxStickUp() == false) {
 			contractTop();
 			
-			isTopSolenoidExtended = false;
+			isTopSolenoidExtended = true;
 		}
 		
 		Dashboard.putString("Elevator : BOTTOM : Extended", new String("" + isBottomSolenoidExtended).toUpperCase());
